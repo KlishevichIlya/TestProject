@@ -25,7 +25,7 @@ namespace TestProject_For_CoralTeam.Services
             {
                 client.CheckCertificateRevocation = false;
                 await client.ConnectAsync("smtp.gmail.com", 587, false);
-                await client.AuthenticateAsync("klishevich.ilya@gmail.com", "QWERTYu12345");
+                await client.AuthenticateAsync("***", "***");
                 await client.SendAsync(emailMessage);
 
                 await client.DisconnectAsync(true);
