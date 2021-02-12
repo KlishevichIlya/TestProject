@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30804.86
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProject_For_CoralTeam", "TestProject_For_CoralTeam\TestProject_For_CoralTeam.csproj", "{260E1C29-5058-4E26-A83C-6BF960F0D0F6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{260E1C29-5058-4E26-A83C-6BF960F0D0F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{260E1C29-5058-4E26-A83C-6BF960F0D0F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{260E1C29-5058-4E26-A83C-6BF960F0D0F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{260E1C29-5058-4E26-A83C-6BF960F0D0F6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0CB8D8E7-8580-4C06-B0AE-2FDDFE93B591}
+	EndGlobalSection
+EndGlobal

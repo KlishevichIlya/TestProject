@@ -1,0 +1,237 @@
+﻿@{
+    ViewData["Title"] = "New User Registration";
+    Layout = null;
+}
+@using Microsoft.Extensions.Options
+@using TestProject_For_CoralTeam.Options
+
+@model TestProject_For_CoralTeam.ViewModels.RegisterViewModel;
+@inject IOptions<AppOptions> AppOptions
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}
+
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link rel="stylesheet" href="~/css//registration.css" />
+    <script src="https://www.google.com/recaptcha/api.js"></script>
+</head>
+
+<body>
+    <form class="registration-form" asp-controller="Home" asp-action="Register">
+        <p class="lead">New User Registration</p>
+        <div id="UnderHeader">
+            <p style="margin-left:150px;">STEP 1: Contact Info</p>
+            <p style="margin-left:150px;" hidden>STEP 2: Areas</p>
+            <p style="margin-left:150px;" hidden>STEP 3: Address</p>
+            <p style="margin-left:150px;" hidden>STEP 4: Password</p>
+            <p style="margin-left:150px;" hidden>STEP 5: Completed</p>
+        </div>
+
+        <div id="error" class="validation" style="margin-left: 150px;" asp-validation-summary="ModelOnly"></div>
+
+        <main class="main-block">
+            <nav class="right-line">
+                <ul id="step" class="progressbar">
+                    <li class="active"></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+            </nav>
+
+            <div class="main-content" style="padding:10px;">
+                <!--***************1PAGE************************-->
+
+                <div class="form-group" style="width:50%;height:10%;padding-right:100px;">
+                    <label class="custom-control-label">SALUTATION: </label>
+                    <select style="width:150px;height:25px;float:right;" asp-for="Salutation" asp-items="Html.GetEnumSelectList<TestProject_For_CoralTeam.Models.Salutation.Variants>()" required="" oninvalid="this.setCustomValidity('Salutation is required')" oninput="setCustomValidity('')">
+                        <option selected disabled></option>
+                    </select>
+                </div>
+
+                <div class="form-group" style="width:50%;height:10%;padding-right:100px;">
+                    <label asp-for="Email">EMAIL: </label>
+                    <input style="width:150px;height:25px;float:right;" type="email" asp-for="Email" required="" oninvalid="this.setCustomValidity('Email is required')" oninput="setCustomValidity('')" />
+                    <br />
+                    <span style="font-size:10px;">EMAIL WILL BE YOUR LOGIN</span>
+                    <span asp-validation-for="Email"></span>
+                </div>
+
+
+                <div class="form-group" style="width:50%;height:10%;padding-right:100px;">
+                    <label asp-for="FirstName">FIRST NAME: </label>
+                    <input id="firstName" style="width:150px;height:25px;float:right;" type="text" asp-for="FirstName" required="" oninvalid="this.setCustomValidity('Fisrt Name is required')" oninput="setCustomValidity('')" />
+
+                </div>
+
+                <div class="form-group" style="width:50%;height:10%;padding-right:100px;">
+                    <label asp-for="ConfirmEmail">CONFIRM EMAIL: </label>
+                    <input style="width:150px;height:25px;float:right;" type="email" asp-for="ConfirmEmail" required="" oninvalid="this.setCustomValidity('Confirm Email is required')" oninput="setCustomValidity('')" /><br />
+                    <span asp-validation-for="ConfirmEmail"></span>
+                </div>
+
+                <div class="form-group" style="width:50%;height:10%;padding-right:100px;">
+                    <label asp-for="MiddleName" class="custom-control-label">MIDDLE NAME: </label>
+                    <input style="width:150px;height:25px;float:right;" type="text" asp-for="MiddleName" />
+                </div>
+
+
+                <div class="form-group" style="width:50%;height:10%;padding-right:100px;">
+                    <label asp-for="Phone">PHONE: </label>
+                    <input style="width:150px;height:25px;float:right;" type="tel" asp-for="Phone" pattern="375[0-9]{2}[0-9]{7}" /><br />
+                    <span asp-validation-for="Phone"></span>
+                </div>
+
+
+
+                <div class="form-group" style="width:50%;height:10%;padding-right:100px;">
+                    <label asp-for="LastName" class="custom-control-label">LAST NAME: </label>
+                    <input style="width:150px;height:25px;float:right;" type="text" asp-for="LastName" required="" oninvalid="this.setCustomValidity('Last Name is required')" oninput="setCustomValidity('')" />
+
+                </div>
+
+                <div class="form-group" style="width:50%;height:10%;padding-right:100px;">
+                    <label asp-for="Fax">FAX: </label>
+                    <input style="width:150px;height:25px;float:right;" type="tel" asp-for="Fax" pattern="375[0-9]{2}[0-9]{7}" /><br />
+                    <span asp-validation-for="Fax"></span>
+                </div>
+
+                <div class="form-group" style="width:50%;height:10%;padding-right:100px;">
+                    <label asp-for="Company" class="custom-control-label">COMPANY: </label>
+                    <input style="width:150px;height:25px;float:right;" type="text" asp-for="Company" required="" oninvalid="this.setCustomValidity('Company is required')" oninput="setCustomValidity('')" />
+
+                </div>
+
+                <div class="form-group" style="width:50%;height:10%;padding-right:100px;">
+                    <label asp-for="Mobile">MOBILE: </label>
+                    <input style="width:150px;height:25px;float:right;" type="tel" asp-for="Mobile" pattern="375[0-9]{2}[0-9]{7}" /><br />
+                    <span asp-validation-for="Mobile"></span>
+                </div>
+
+                <div class="form-group" style="width:50%;height:10%;padding-right:100px;">
+                    <label asp-for="Title">TITLE: </label>
+                    <input style="width:150px;height:25px;float:right;" type="text" asp-for="Title" required="" oninvalid="this.setCustomValidity('Title is required')" oninput="setCustomValidity('')" />
+                </div>
+                <!--***************2PAGE************************-->
+                <div class="form-group" style="width:50%;height: 40%;" hidden>
+                    <span><b>Business Areas:</b> </span> <br />
+
+                    <input class="check-box" data-val="true" data-val-required="The Finance field is required." id="Finance" name="Finance" type="checkbox" value="true">
+                    <input name="Finance" type="hidden" value="false" class="check-box" />
+                    <label>Finance</label><br />
+
+                    <input class="check-box" data-val="true" data-val-required="The Operations field is required." id="Operations" name="Operations" type="checkbox" value="true">
+                    <input name="Operations" type="hidden" value="false" class="check-box" />
+                    <label>Operations</label><br />
+
+                    <input class="check-box" data-val="true" data-val-required="The IT field is required." id="IT" name="IT" type="checkbox" value="true">
+                    <input name="IT" type="hidden" value="false" class="check-box" />
+                    <label>IT</label><br />
+
+                    <input class="check-box" data-val="true" data-val-required="The Sales field is required." id="Sales" name="Sales" type="checkbox" value="true">
+                    <input name="Sales" type="hidden" value="false" class="check-box" />
+                    <label>Sales</label><br />
+
+                    <input class="check-box" data-val="true" data-val-required="The Administrative field is required." id="Administrative" name="Administrative" type="checkbox" value="true">
+                    <input name="Administrative" type="hidden" value="false" class="check-box" />
+                    <label>Administrative</label><br />
+
+                    <input class="check-box" data-val="true" data-val-required="The Legal field is required." id="Legal" name="Legal" type="checkbox" value="true">
+                    <input name="Legal" type="hidden" value="false" class="check-box" />
+                    <label>Legal</label><br />
+
+                    <input class="check-box" data-val="true" data-val-required="The Marketing field is required." id="Marketing" name="Marketing" type="checkbox" value="true">
+                    <input name="Marketing" type="hidden" value="false" class="check-box" />
+                    <label>Marketing</label><br />
+
+                </div>
+
+                <div class="form-group" style="width:50%;height:40%;" hidden>
+                    <span><b>Comments</b></span><br />
+                    <textarea asp-for="Comments" rows="5" cols="45" style="resize:none;" required=""></textarea><br />
+                    <span style="font-size:10px;">LET US KNOW FOR WHICH NETWORK YOU ARE REQUESTING ACCESS, AND ANY <br /> OTHER COMMENTS YOU'D LIKE TO LEAVE US</span>
+                </div>
+                <!--***************3PAGE************************-->
+                <div class="form-group" style="width:100%;height:10%;padding-right:400px; text-align:center;" hidden>
+                    <label class="custom-control-label">COUNTRY: </label>
+                    <select style="width:150px;height:25px;float:right;" asp-for="Country" asp-items="Html.GetEnumSelectList<TestProject_For_CoralTeam.Models.Country.Variants>()" required="">
+                        <option selected disabled></option>
+                    </select>
+                </div>
+
+
+                <div class="form-group" style="width:100%;height:10%;padding-right:400px; text-align:center;" hidden>
+                    <label asp-for="OfficeName">OFFICE NAME: </label>
+                    <input style="width:150px;height:25px;float:right;" type="text" asp-for="OfficeName" required="" />
+                </div>
+
+                <div class="form-group" style="width:100%;height:10%;padding-right:400px; text-align:center;" hidden>
+                    <label asp-for="Address">ADDRESS: </label>
+                    <textarea asp-for="Address" style="resize:none;float:right;width:150px;height:55px;" required=""></textarea>
+                </div>
+
+                <div class="form-group" style="width:100%;height:10%;padding-right:400px; text-align:center;" hidden>
+                    <label asp-for="PostalCode">POSTAL CODE: </label>
+                    <input style="width:150px;height:25px;float:right;" type="text" asp-for="PostalCode" required="" />
+                </div>
+
+                <div class="form-group" style="width:100%;height:10%;padding-right:400px; text-align:center;" hidden>
+                    <label asp-for="City">CITY: </label>
+                    <input style="width:150px;height:25px;float:right;" type="text" asp-for="City" required="" />
+                </div>
+
+                <div class="form-group" style="width:100%;height:10%;padding-right:400px; text-align:center;" hidden>
+                    <label class="custom-control-label">STATE: </label>
+                    <select style="width:150px;height:25px;float:right;" asp-for="State" asp-items="Html.GetEnumSelectList<TestProject_For_CoralTeam.Models.State.Variants>()" required="">
+                        <option selected disabled></option>
+                    </select>
+                </div>
+                <!--***************4PAGE************************-->
+                <div class="form-group" style="width:100%;height:10%;padding-right:400px; text-align:center;" hidden>
+                    <label asp-for="Password">PASSWORD: </label>
+                    <input style="width:150px;height:25px;float:right;" type="password" asp-for="Password" required="" pattern="(?=.*\d)(?=.*[A-Z])(?=.*[a-z]).{8,}" title="Пароль должен быть не короче 8 символов и содержать строчную и заглавную буквы и цифру" />
+                </div>
+
+                <div class="form-group" style="width:100%;height:10%;padding-right:400px; text-align:center;" hidden>
+                    <label asp-for="ConfirmPassword">CONFIRM PASSWORD: </label>
+                    <input style="width:150px;height:25px;float:right;" type="password" asp-for="ConfirmPassword" required="" pattern="(?=.*\d)(?=.*[A-Z])(?=.*[a-z]).{8,}" title="Пароль должен быть не короче 8 символов и содержать строчную и заглавную буквы и цифру" /><br/>
+                    <span asp-validation-for="ConfirmPassword"></span>
+                </div>
+
+                <div class="form-group" style="width:100%;height:20%;padding-left:95px;" hidden>
+                    <div class="g-recaptcha" id="Cap" data-sitekey="6LflC1UaAAAAALYlp88jNiTrzPrE4tlLrE6YzjEu"></div>
+                    @*<div id="reCaptcha" class="g-recaptcha" data-sitekey="@AppOptions.Value.ReCaptcha.SiteKey"></div>*@
+                    @Html.ValidationMessage("ReCaptchaError", new { @class = "text-danger" })
+                </div>
+
+                <!--***************5PAGE************************-->
+                <div class="form=group" hidden>
+                    <div style="text-align:center;width:70%;height:70%;" id="LastPage">
+                        <p><b>Thank you for registering!</b></p>
+                        <span> A registering confirmation email was sent to email address provider. Your registration will be sent for approval and activation to the Administrator.<b>You will receive an email when you account is ready to use.</b></span>
+                    </div>
+                </div>
+
+            </div>
+            @*<div class="button-next">
+               <input id="nextButton" type="submit" value="Next" />
+            </div>*@
+
+            <button style="height:7%;" id="prevButton" class="btn btn-secondary" hidden>Back</button>
+            <button style="height:7%;" type="submit" id="nextButton" class="btn btn-primary">Next</button>
+        </main>
+
+    </form>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+    <script src="~/js/register.js"></script>
+    <script src="https://www.google.com/recaptcha/api.js"></script>
+
+</body>
+
+</html>
